@@ -16,7 +16,7 @@ const AvailableMeals = () => {
       name: "Ghari",
       description:
         "Ghari is the one of the famous trademark sweet of the surat",
-      price: 600 + " / 1 k.g",
+      price: 600 ,
     },
     {
       id: 3,
@@ -28,7 +28,7 @@ const AvailableMeals = () => {
       id: 4,
       name: "7 cheese pizza",
       description: "7 cheese piza is our restorant's one of the famous item",
-      price: 700 + " / Medium size",
+      price: 700 ,
     },
   ];
 
