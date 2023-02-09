@@ -1,38 +1,35 @@
+import { useEffect, useState } from "react";
 import classes from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 
 const AvailableMeals = () => {
-  const DUMMY_MEALS = [
-    {
-      id: 1,
-      name: "khawsa",
-      description:
-        "Khavsa is the famous item in surat, This item born from Berma. In berma khavsa called as Khavu-swe",
-      price: 35,
-    },
-    {
-      id: 2,
-      name: "Ghari",
-      description:
-        "Ghari is the one of the famous trademark sweet of the surat",
-      price: 600 ,
-    },
-    {
-      id: 3,
-      name: "Aloo-Puri",
-      description: "Aloo-puri is the gujarati famous snack",
-      price: 30,
-    },
-    {
-      id: 4,
-      name: "7 cheese pizza",
-      description: "7 cheese piza is our restorant's one of the famous item",
-      price: 700 ,
-    },
-  ];
+  const [mealsData, setMealsData] = useState([]);
 
-  const meals = DUMMY_MEALS.map((meal) => (
+  useEffect( () => {
+    const fetchMeals = async () => {
+      const response = await fetch(
+        "https://food-order-app-da825-default-rtdb.firebaseio.com/Meals.json"
+      );
+      const responseData = await response.json();
+
+      const loadedData = [];
+        
+      for (const key in responseData) {
+        loadedData.push({
+          id: key,
+          name: responseData[key].name,
+          desc: responseData[key].description,
+          price: responseData[key].price,
+        });
+      }
+
+      setMealsData(loadedData);
+    };
+    fetchMeals();
+  }, []);
+
+  const meals = mealsData.map((meal) => (
     <MealItem
       id={meal.id}
       key={meal.id}
