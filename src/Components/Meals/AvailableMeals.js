@@ -12,9 +12,7 @@ const AvailableMeals = () => {
     const fetchMeals = async () => {
       setIsLoading(true);
 
-      const response = await fetch(
-        "https://food-order-app-da825-default-rtdb.firebaseio.com/Meals.json"
-      );
+      const response = await fetch(`${process.env.REACT_APP_MEALS_FETCH}`);
 
       if (!response.ok) {
         throw new Error("Something went Wrong!");
