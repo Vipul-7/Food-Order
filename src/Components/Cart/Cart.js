@@ -29,7 +29,7 @@ const Cart = (props) => {
     await fetch(
       "https://food-order-app-da825-default-rtdb.firebaseio.com/orders.json",
       {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({
           user: userData,
           orderedItems: cartCtx.items,
