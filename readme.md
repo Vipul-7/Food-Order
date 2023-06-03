@@ -1,6 +1,6 @@
 ## Description
 
-This project is a simple food ordering app where you can order foodes with preety good UI and UX.
+This project is a simple food ordering app where you can order foods.
 
 This project was bootstrapped with `Create React App`.
 
