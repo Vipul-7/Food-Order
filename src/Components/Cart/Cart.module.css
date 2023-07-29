@@ -4,8 +4,13 @@
   padding: 0;
   max-height: 20rem;
   overflow: auto;
-  max-height: 20rem;
-  /* overflow: scroll; */
+  /* height: 9rem; */
+}
+
+@media screen and (max-height: 825px) {
+  .cart-items {
+    height: 10rem;
+  }
 }
 
 .total {
