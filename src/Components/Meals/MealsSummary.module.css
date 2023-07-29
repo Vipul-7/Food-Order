@@ -16,3 +16,12 @@
     font-size: 2rem;
     margin-top: 0;
   }
+
+  @media screen and (max-width: 660px) {
+    .summary h2 {
+      font-size: 1.5rem;
+    }
+    .summary p {
+      font-size: .9rem;
+    }
+  }
