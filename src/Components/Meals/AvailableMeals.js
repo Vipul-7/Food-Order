@@ -3,6 +3,8 @@ import classes from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 
+import supabase from "../../util/supabase";
+
 const AvailableMeals = () => {
   const [mealsData, setMealsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -12,28 +14,26 @@ const AvailableMeals = () => {
     const fetchMeals = async () => {
       setIsLoading(true);
 
-      const response = await fetch(
-        "https://food-order-app-da825-default-rtdb.firebaseio.com/Meals.json"
-      );
+      const { data, error } = await supabase.from('meals').select()
 
-      if (!response.ok) {
-        throw new Error("Something went Wrong!");
+      if (error) {
+        throw new Error(error.message);
       }
 
-      const responseData = await response.json();
+      // const responseData = await response.json();
 
-      const loadedData = [];
+      // const loadedData = [];
 
-      for (const key in responseData) {
-        loadedData.push({
-          id: key,
-          name: responseData[key].name,
-          description: responseData[key].description,
-          price: responseData[key].price,
-        });
-      }
+      // for (const key in responseData) {
+      //   loadedData.push({
+      //     id: key,
+      //     name: responseData[key].name,
+      //     description: responseData[key].description,
+      //     price: responseData[key].price,
+      //   });
+      // }
 
-      setMealsData(loadedData);
+      setMealsData(data);
       setIsLoading(false);
     };
 
