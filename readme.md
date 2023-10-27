@@ -4,7 +4,7 @@ This project is a simple food ordering app where you can order foods.
 
 This project was bootstrapped with `Create React App`.
 
-For data storage there is used firebase realtime database which stores the all avaiable foodes data(`GET` req.) and the orders(`POST` req.).
+I used two databases for this project in different branches `main branch - firebase` and `supabase branch -supabase`. Where I stored all available meals and orders from users.
 
 ## Contribute to this project
 

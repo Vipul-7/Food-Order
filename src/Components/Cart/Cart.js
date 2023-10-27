@@ -4,6 +4,7 @@ import Modal from "../UI/Modal";
 import CartContext from "../Store/cart-context";
 import CartItem from "./CartItem";
 import Checkout from "./Checkout";
+import supabase from "../../util/supabase";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
@@ -25,17 +26,39 @@ const Cart = (props) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
+    
+    const { data: orderData, error : orderError } = await supabase
+    .from('order')
+    .insert([
+      { 
+        name : userData.name,
+        street : userData.street,
+        postalCode : userData.postalCode,
+        city : userData.city,
+       },
+    ])
+    .select("orderId");
 
-    await fetch(
-      "https://food-order-app-da825-default-rtdb.firebaseio.com/orders.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderedItems: cartCtx.items
-        }),
-      }
-    );
+    if (orderError) {
+      throw new Error(orderError.message);
+    }
+
+    const orderedItems = cartCtx.items.map((item) => {
+      return {
+        orderId : orderData[0].orderId,
+        mealId: item.id,
+        quantity: item.amount,
+      };
+    });
+
+    
+    const { data : orderItemsData, error : orderItemsError } = await supabase
+    .from('orderItems')
+    .insert(orderedItems);
+
+    if(orderItemsError){
+      throw new Error(orderItemsError.message);
+    }
 
     setIsSubmitting(false);
     setDidSubmit(true);

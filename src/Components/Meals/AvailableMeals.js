@@ -20,19 +20,6 @@ const AvailableMeals = () => {
         throw new Error(error.message);
       }
 
-      // const responseData = await response.json();
-
-      // const loadedData = [];
-
-      // for (const key in responseData) {
-      //   loadedData.push({
-      //     id: key,
-      //     name: responseData[key].name,
-      //     description: responseData[key].description,
-      //     price: responseData[key].price,
-      //   });
-      // }
-
       setMealsData(data);
       setIsLoading(false);
     };
