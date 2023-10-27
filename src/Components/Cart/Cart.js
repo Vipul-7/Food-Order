@@ -28,7 +28,7 @@ const Cart = (props) => {
     setIsSubmitting(true);
     
     const { data: orderData, error : orderError } = await supabase
-    .from('order')
+    .from('orders')
     .insert([
       { 
         name : userData.name,
